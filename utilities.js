@@ -304,3 +304,66 @@ function hex2u8a() {
 		console.error(e);
 	}
 }
+
+const TYPES = {
+};
+
+const types = polkadotTypes;
+
+const registry = new types.TypeRegistry();
+registry.register(TYPES);
+
+
+let decEnc = {
+	"d2e": document.getElementById("dt-dec"),
+	"dty": document.getElementById("dt-type"),
+	"e2d": document.getElementById("dt-enc"),
+	"encBtn": document.getElementById("encode-btn"),
+	"decBtn": document.getElementById("decode-btn")
+};
+
+decEnc.encBtn.addEventListener("click", encodeInputData);
+decEnc.decBtn.addEventListener("click", decodeInputData);
+
+
+function encodeInputData() {
+	try {
+		let data = decEnc.d2e.value;
+		let type = decEnc.dty.value;
+		decEnc.e2d.value = encodeData(data, type);
+		console.log(data, type, decEnc.e2d.value);
+	} catch (e) {
+		decEnc.e2d.value = "Error";
+		console.error(e);
+	}
+}
+
+function decodeInputData() {
+	try {
+		let data = decEnc.e2d.value;
+		let type = decEnc.dty.value;
+		decEnc.d2e.value = JSON.stringify(decodeHex(data, type));
+		console.log(data, type, decEnc.d2e.value);
+	} catch (e) {
+		decEnc.d2e.value = "Error";
+		console.error(e);
+	}
+}
+
+/** Encodes object/ string of given type to hex
+ * @param  {Object | String} data Object to be encoded
+ * @param  {String} typeKey Key from METABLOCKCHAIN_TYPES which represents type of data
+ * @returns {String} Encoded Hex
+ */
+ function encodeData(data, typeKey) {
+  return types.createType(registry, typeKey, data).toHex();
+}
+
+/** Decodes hex of given type to it's corresponding object/value
+ * @param  {String} hexValue Hex String to be decoded
+ * @param  {String} typeKey Key from METABLOCKCHAIN_TYPES which represents type of data
+ * @returns {Object | String} Decoded Object/String
+ */
+function decodeHex(hexValue, typeKey) {
+  return types.createType(registry, typeKey, hexValue).toJSON();
+}

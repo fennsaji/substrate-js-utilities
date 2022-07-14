@@ -154,6 +154,22 @@
 							</div>
 							<input type="text" class="form-control" id="hex-u82h" placeholder="Hex">
 						</div>
+						<h4>Decode Encode Data With Type</h4>
+						<div class="input-group">
+							<input type="text" class="form-control" id="dt-type" placeholder="Type">
+						</div>
+						<br>
+						<div class="input-group">
+							<textarea type="text" class="form-control" id="dt-dec" placeholder="Data"></textarea>
+							<button id="encode-btn" placeholder="Encode">Encode
+							</button>
+						</div>
+						<br>
+						<div class="input-group">
+							<textarea type="text" class="form-control" id="dt-enc" placeholder="Value"></textarea>
+							<button id="decode-btn" placeholder="Encode">Decode
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -170,9 +186,11 @@
 			</span>
 		</div>
 	</footer>
+	<script type="text/javascript" src="types.json"></script>
 	<script src="https://unpkg.com/@polkadot/util/bundle-polkadot-util.js"></script>
 	<script src="https://unpkg.com/@polkadot/util-crypto/bundle-polkadot-util-crypto.js"></script>
 	<script src="https://unpkg.com/@polkadot/keyring/bundle-polkadot-keyring.js"></script>
+	<script src="https://unpkg.com/@polkadot/types@8.12.2/bundle-polkadot-types.js"></script>
 
 	<script src="utilities.js"></script>
 </body>
